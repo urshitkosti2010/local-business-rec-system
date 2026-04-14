@@ -1,0 +1,314 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+
+/* Philosophy: Structured clarity over AI-template flair.  */
+/* No gradient text. No neon glows. Clean navy dark.        */
+
+:root {
+  /* ── Palette ── */
+  --bg:              #111118;
+  --bg-low:          #17171f;
+  --bg-card:         #1e1e28;
+  --bg-card-high:    #242432;
+  --bg-card-highest: #2a2a3a;
+
+  /* Border — structural, not decorative */
+  --border:          #2c2c3e;
+  --border-light:    #3c3c50;
+
+  /* Text */
+  --text-primary:    #e8e6f0;
+  --text-secondary:  #9e9baa;
+  --text-muted:      #3c3c50;
+
+  /* Accents — scoped usage */
+  --indigo:          #7c6af7;   /* buttons, active nav ONLY */
+  --indigo-dim:      #5b4ce0;   /* button hover */
+  --indigo-alpha:    rgba(124,106,247,0.1);
+  --teal:            #2dd4bf;   /* "Open" badges, success ONLY */
+  --teal-alpha:      rgba(45,212,191,0.1);
+  --amber:           #f59e0b;   /* star ratings ONLY */
+
+  /* Status */
+  --danger:          #f87171;
+  --danger-alpha:    rgba(248,113,113,0.1);
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+/* ─── Card ─── */
+/* Standard card: opaque, thin border, no blur, no glow */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.card:hover {
+  border-color: var(--border-light);
+  background: var(--bg-card-high);
+}
+
+/* Legacy .glass alias — made opaque to remove AI glassmorphism */
+.glass {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.glass:hover {
+  border-color: var(--border-light);
+  background: var(--bg-card-high);
+  transform: none;          /* No float-up animation */
+  box-shadow: none;         /* No neon glow */
+}
+
+/* ─── Buttons ─── */
+.btn-primary {
+  background: var(--indigo);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover {
+  background: var(--indigo-dim);
+  transform: translateY(-1px);
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.84rem;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.btn-ghost:hover {
+  border-color: var(--indigo);
+  color: var(--indigo);
+  background: var(--indigo-alpha);
+}
+
+/* ─── Inputs ─── */
+.input {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+.input:focus {
+  border-color: var(--indigo);
+  /* No glow — clean focus ring only */
+}
+.input::placeholder { color: var(--text-secondary); }
+
+select.input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239e9baa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+  cursor: pointer;
+}
+select.input option { background: var(--bg-card); color: var(--text-primary); }
+
+/* ─── Stars — amber ONLY ─── */
+.stars { color: var(--amber); }
+
+/* ─── Badges ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Category badge — muted, no color accent */
+.badge-category {
+  background: var(--bg-card-highest);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Was badge-purple — now muted */
+.badge-purple {
+  background: var(--bg-card-highest);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Open badge — teal */
+.badge-green {
+  background: var(--teal-alpha);
+  color: var(--teal);
+  border: 1px solid rgba(45,212,191,0.2);
+}
+
+/* Error/closed */
+.badge-red {
+  background: var(--danger-alpha);
+  color: var(--danger);
+  border: 1px solid rgba(248,113,113,0.2);
+}
+
+/* Indigo badge (for ranked items etc.) */
+.badge-indigo {
+  background: var(--indigo-alpha);
+  color: var(--indigo);
+  border: 1px solid rgba(124,106,247,0.2);
+}
+
+/* Legacy compat */
+.badge-blue   { background: var(--bg-card-highest); color: var(--text-secondary); border: 1px solid var(--border); }
+.badge-orange { background: var(--bg-card-highest); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+
+/* ─── Spinner ─── */
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--border);
+  border-top-color: var(--indigo);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Progress bar ─── */
+.progress-bar {
+  height: 6px;
+  border-radius: 6px;
+  background: var(--border);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--indigo);
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Animations ─── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeSlideUp 0.4s ease forwards; }
+
+/* ─── Divider ─── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+/* ─── Section label ─── */
+.section-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  padding: 0 0.5rem;
+}
+
+/* ─── Gradient text (REMOVED — kept as class but rendered plain) ─── */
+.gradient-text {
+  color: var(--text-primary);
+}
+
+/* ─── Stat tile ─── */
+.stat-tile {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+.stat-tile .stat-number {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);   /* uniform white — no colored numbers */
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.stat-tile .stat-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* ─── No background glows (override body pseudo-elements) ─── */
+body::before, body::after { display: none; }
+
+main { position: relative; z-index: 1; }
+aside { position: relative; z-index: 1; }
+
+/* ─── Pulse for online dot ─── */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+.pulse-glow { animation: pulseGlow 2.5s ease-in-out infinite; }
